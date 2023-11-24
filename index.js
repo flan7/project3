@@ -71,13 +71,14 @@ function create_board(size){
     board.style.setProperty('--grid-rows', Math.sqrt(size));
     board.style.setProperty('--grid-cols', Math.sqrt(size));
 
-    board.style.backgroundImage = `url(${background})`;
+    //board.style.backgroundImage = `url(${background})`;
 
     //creates divs for each number of tiles on board, minus 1 tile for the
     //empty
-    for (let i = 0; i < size.length - 1; i++){
+    for (let i = 0; i < size - 1; i++){
         var tile = document.createElement('div');
         tile.className = 'grid-item';
+        tile.dataset.index = i;
         tile.addEventListener('click', tile_click);
 
         //used as index
@@ -88,7 +89,7 @@ function create_board(size){
     }
 
     //empty coords set to the bottom right tile
-    empty = [Math.sqrt(size) - 1,Math.sqrt(size) - 1];
+    empty = [Math.sqrt(size),Math.sqrt(size)];
 
 
     //tiles clicked
