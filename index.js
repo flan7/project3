@@ -103,9 +103,7 @@ function create_board(){
 //is_movable() function
 function tile_click(event){
     var tile = event.target;
-    var temp_x = tile.style.gridColumn;
-    var temp_y = tile.style.gridRow;
-
+    var coords = array_index_to_grid_coord(tile.dataset.index);
 
     //if tile is movable, swaps it with the empty tile
     if (is_movable(tile)){
@@ -113,8 +111,8 @@ function tile_click(event){
         tile.style.gridColumn = empty[0];
         tile.style.gridRow = empty[1];
 
-        empty[0] = temp_x;
-        empty[1] = temp_y;
+        empty[0] = coords[0];
+        empty[1] = coords[1];
 
         //tile click counter
         tiles_clicked++;
