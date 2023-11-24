@@ -1,176 +1,158 @@
 //global vars to store data
 let time;
-let remaining;
-let visible = [];
-let matches = [];
-let images = [];
+let tiles_clicked;
+let tiles = [];
+let background;
+let empty = [];
 
-//returns a shuffled array of images to put in a grid
-function gen_images(num_pics){
+function gen_bg(option){
 
-    var images_array = ["image001.gif","image002.gif","image003.gif","image004.gif",
-                       "image005.gif","image006.gif","image007.gif","image008.gif",
-                       "image009.gif","image0010.gif","image0011.gif","image0012.gif"];
+    var basedir = "pics/";
+    
+    //returns random background if no option selected i.e. first boot.
+    //otherwise selects that number background
+    if (option == undefined){
 
-    //remove extras if using less pics. I added the 4* after the fact and am
-    //not sure what is going on with my math but it works so im keeping it.
-    //thought just length - num_pics should work.
-    for (let i = 0; i < (images_array.length - num_pics);i++){
-        images_array.pop();
+        var background_images = ["b1.png","b2.png","b3.png","b4.png"];
+        var bg = background_images[Math.floor(Math.random() * background_images.length)];
+
+    }
+    else{
+       var bg = background_images[option];
     }
 
-    //make array of all options, then shuffle like deal or no deal
-    return shuffle(images_array.concat(images_array));
+    return basedir + bg;
 }
 
 //shuffle by inputting random nums to sort()
-function shuffle(array){
+function shuffle_helper(array){
     
     return array.sort(()=>Math.random()-0.5);
 
 }
     
-//gets time of each picture amount
-function get_pic_time(num_pics){
-    if (num_pics === 8){
-        return 120;
-    }
-    else if (num_pics === 10){
-        return 150;
-    }
-    else{
-        return 180;
-    }
-}
+//starts the game when player presses button, initializes things, main funciton
+function shuffle(size){
 
-//starts the game when player presses button, initializes things
-function ready(num_pics, diff){
+    //unlike HW4, start time from zero and increment in the timer() function
+    //below
+    time = 0;
 
-    //get round time
-    time = get_pic_time(num_pics);
-
-    //create images for grid
-    images = gen_images(num_pics);
-    visible = [];
-    pairs = [];
+    //set background image for grid
+    background = gen_bg();
 
     //creates initial board
-    create_board();
+    create_board(size);
     
-    //refreshes the function every second
-    remaining = setInterval(timer, 1000);
+    //refreshes the function every second, for timer to count up
+    current_time = setInterval(timer, 1000);
 
 }
 
-//checks for timer to be 0, compares current time to max time and
-//sets
+//similar to function created in HW4 but counts up and has no time=0 lose
+//condition
 function timer(){
 
-    time--;
-
-    //checks for time to be up
-    if(time === 0){
-        //stop timer function from running again
-        clearInterval(timer);
-        document.getElementById('award').textContent = 'Loser! You\'re a Loser! Baby want a bottle, a big dirt bottle?';
-    }
+    time++;
 
     //sets the timer
     var min = Math.floor(time / 60); //rounds down for round number
     var sec = time % 60; //remainder is seconds
-    document.getElementById('remaining').innerHTML = min + ":" + sec;
+    document.getElementById('time').innerHTML = min + ":" + sec;
 }
 
 //creates the game board
-function create_board(){
+function create_board(size){
     
     //gets the board object defined in index.html
     var board = document.getElementById('board');
+    
+    //create grid
+    board.style.setProperty('--grid-rows', Math.sqrt(size));
+    board.style.setProperty('--grid-cols', Math.sqrt(size));
 
-    //loops through number of images to add each shuffled image to the board,
-    //and adds click event listeners for each
-    for (let i = 0; i < images.length; i++){
+    board.style.backgroundImage = `url(${background})`;
+
+    //creates divs for each number of tiles on board, minus 1 tile for the
+    //empty
+    for (let i = 0; i < size.length - 1; i++){
         var tile = document.createElement('div');
-        tile.className = 'tile';
-        tile.dataset.index = i;
+        tile.className = 'grid-item';
         tile.addEventListener('click', tile_click);
 
-        tile.style.backgroundImage = `url(pics/${images[tile.dataset.index]})`;
+        //used as index
+        tile.innerText = i + 1;
+
         board.appendChild(tile);
         
     }
-    //after the seconds set in difficulty, board sets all tiles to the
-    //default
-    setTimeout(set_default, difficulty * 1000);
+
+    //empty coords set to the bottom right tile
+    empty = [Math.sqrt(size) - 1,Math.sqrt(size) - 1];
 }
 
-function set_default(){
-    for (let i = 0; i < board.children.length; i++){
-        board.children[i].style.backgroundImage = `url(pics/${board.children[i].dataset.index}.gif)`;
-    }
-}
-
-//handles the events created by create_board() for each tile click
+//handles the events created by create_board() for each tile click. Calls the
+//is_movable() function
 function tile_click(event){
     var tile = event.target;
+    var temp_x = tile.style.gridColumn;
+    var temp_y = tile.style.gridRow;
 
-    //stores a clicked tile in visible if there is room
-    if(!visible.includes(tile) && visible.length < 2){
-        tile.style.backgroundImage = `url(pics/${images[tile.dataset.index]})`;
-        visible.push(tile);
+    //if tile is movable, swaps it with the empty tile
+    if (is_movable(tile)){
 
-        //check for second tile
-        if (visible.length === 2){
-            //waits slightly before setting match so the user can still see
-            //what they clicked
-            setTimeout(verify_match,250);
+        tile.style.gridColumn = empty[0];
+        tile.style.gridRow = empty[1];
+
+        empty[0] = temp_x;
+        empty[1] = temp_y;
+
+        //verifies if this is the last move
+        verify_win();
+
+    }
+
+}
+
+function is_movable(tile){
+
+    //if tile is adjacent, reutrn true
+    if (tile.style.gridColumn - empty[0] < 2 && tile.style.gridRow - empty[1] < 2){
+        return true;
+    }
+    return false;
+}
+
+function verify_win(){
+    
+    var is_win = false;
+
+    //loops through all elements and compares their number value to their index
+    //in the grid
+    let i = 0;
+    for(let child of board.children){
+        if (child.innerText === i + 1){
+            is_win = true;
         }
+        else{
+            is_win = false;
+            break;
+        }
+
+        i++;
+    }
+
+    if (is_win){
+        //stop timer
+        clearInterval(timer);
+        //set the award messag
+        document.getElementsByClassName('award').textContent = 'U win!';
     }
 }
 
-//verifies if the two visible tiles are matching
-function verify_match(){
 
-    //if the indexes of both visible images return the same object from
-    //images[],
-    //they are matches
-
-    if (images[visible[0].dataset.index] === images[visible[1].dataset.index]){
-
-        //valid match, push to matches list
-        matches.push(visible[0]);
-        matches.push(visible[1]);
-
-        //all images are matched, win condition
-        if (matches.length >= images.length){
-        
-            //stop timer
-            clearInterval(timer);
-            //set the award message as per the outline
-            document.getElementsByClassName('award').textContent = 'U win!';
-        }
-        else {
-            //no win, remove the two matches from play
-            visible[0].style.backgroundImage = `url(pics/match.png)`;
-            visible[1].style.backgroundImage = `url(pics/match.png)`;
-        }
-    }
-    //reset images
-    else{
-        visible[0].style.backgroundImage = `url(pics/${visible[0].dataset.index}.gif)`;
-        visible[1].style.backgroundImage = `url(pics/${visible[1].dataset.index}.gif)`;
-    }
-
-
-    //always clear the visible array or pieces will remain on board
-    visible = []; 
-}
-
-//prompts for pic num and difficulty
-var num = parseInt(prompt("Enter number of pictures (8,10,12): "));
-var difficulty = parseInt(prompt("Enter difficulty (3,5,8): "));
 //checks for player to be ready upon button click
-document.getElementById('ready').addEventListener('click', () => ready(num,difficulty));
+document.getElementById('shuffle').addEventListener('click', () => shuffle(16));
 
 
 

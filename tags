@@ -61,21 +61,18 @@
 .tile	style.css	/^.tile {$/;"	c
 Tile Game	index.html	/^    <h1>Tile Game<\/h1>$/;"	h
 Tile Game	index.html	/^    <title>Tile Game<\/title>$/;"	j
+background	index.js	/^let background;$/;"	v
 body	style.css	/^body {$/;"	s
-create_board	index.js	/^function create_board(){$/;"	f
-difficulty	index.js	/^var difficulty = parseInt(prompt("Enter difficulty (3,5,8): "));$/;"	v
-gen_images	index.js	/^function gen_images(num_pics){$/;"	f
-get_pic_time	index.js	/^function get_pic_time(num_pics){$/;"	f
-images	index.js	/^let images = [];$/;"	v
-matches	index.js	/^let matches = [];$/;"	v
-num	index.js	/^var num = parseInt(prompt("Enter number of pictures (8,10,12): "));$/;"	v
+create_board	index.js	/^function create_board(size){$/;"	f
+empty	index.js	/^let empty = [];$/;"	v
+gen_bg	index.js	/^function gen_bg(option){$/;"	f
+is_movable	index.js	/^function is_movable(tile){$/;"	f
 project3	README.md	/^# project3$/;"	c
-ready	index.js	/^function ready(num_pics, diff){$/;"	f
-remaining	index.js	/^let remaining;$/;"	v
-set_default	index.js	/^function set_default(){$/;"	f
-shuffle	index.js	/^function shuffle(array){$/;"	f
+shuffle	index.js	/^function shuffle(size){$/;"	f
+shuffle_helper	index.js	/^function shuffle_helper(array){$/;"	f
 tile_click	index.js	/^function tile_click(event){$/;"	f
+tiles	index.js	/^let tiles = [];$/;"	v
+tiles_clicked	index.js	/^let tiles_clicked;$/;"	v
 time	index.js	/^let time;$/;"	v
 timer	index.js	/^function timer(){$/;"	f
-verify_match	index.js	/^function verify_match(){$/;"	f
-visible	index.js	/^let visible = [];$/;"	v
+verify_win	index.js	/^function verify_win(){$/;"	f
