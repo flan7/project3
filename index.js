@@ -81,7 +81,7 @@ function create_board(size){
         tile.addEventListener('click', tile_click);
 
         //used as index
-        tile.innerText = i + 1;
+        tile.textContent = (i + 1);
 
         board.appendChild(tile);
         
@@ -89,6 +89,10 @@ function create_board(size){
 
     //empty coords set to the bottom right tile
     empty = [Math.sqrt(size) - 1,Math.sqrt(size) - 1];
+
+
+    //tiles clicked
+    tiles_clicked = 0;
 }
 
 //handles the events created by create_board() for each tile click. Calls the
@@ -98,6 +102,7 @@ function tile_click(event){
     var temp_x = tile.style.gridColumn;
     var temp_y = tile.style.gridRow;
 
+
     //if tile is movable, swaps it with the empty tile
     if (is_movable(tile)){
 
@@ -106,6 +111,9 @@ function tile_click(event){
 
         empty[0] = temp_x;
         empty[1] = temp_y;
+
+        //tile click counter
+        document.getElementById('tc').innerHTML = tiles_clicked++;
 
         //verifies if this is the last move
         verify_win();
@@ -131,7 +139,7 @@ function verify_win(){
     //in the grid
     let i = 0;
     for(let child of board.children){
-        if (child.innerText === i + 1){
+        if (child.textContent === i + 1){
             is_win = true;
         }
         else{

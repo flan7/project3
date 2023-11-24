@@ -58,7 +58,7 @@
 !_TAG_ROLE_DESCRIPTION!HTML!stylesheet	extFile	/referenced as external files/
 #award	style.css	/^#award {$/;"	i
 #board	style.css	/^#board {$/;"	i
-.tile	style.css	/^.tile {$/;"	c
+.grid_item	style.css	/^.grid_item {$/;"	c
 Tile Game	index.html	/^    <h1>Tile Game<\/h1>$/;"	h
 Tile Game	index.html	/^    <title>Tile Game<\/title>$/;"	j
 background	index.js	/^let background;$/;"	v

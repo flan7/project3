@@ -13,8 +13,10 @@ body {
   color: gold;
 }
 
-.tile {
-  width: 200px;
-  height: 200px;
+.grid_item {
+  width: 100px;
+  height: 100px;
+  border: 2px black;
+  font: sans-serif;
 }
 
