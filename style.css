@@ -10,7 +10,6 @@ body {
   grid-template-rows: repeat(var(--grid-rows), 100px);
   grid-template-columns: repeat(var(--grid-cols), 100px);
   margin: auto;
-  width: 400px;
 }
 
 #award {

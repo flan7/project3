@@ -4,12 +4,13 @@ let tiles_clicked;
 let tiles = [];
 let background;
 let empty = [];
-let size;
 let shuffle_order = [];
 let board;
-let num_shuffles = 5;
+let size;
+let num_shuffles = 50;
 let shuffle_interval = 150;
 let current_time;
+let audio;
 
 function gen_bg(option){
 
@@ -81,6 +82,8 @@ function shuffle_worker(){
 
             //refreshes the function every second, for timer to count up
             current_time = setInterval(timer, 1000);
+            audio = new Audio('./dvu.mp3');
+            audio.play();
         }
 }
 
@@ -114,6 +117,8 @@ function create_board(){
     board = document.getElementById('board');
     
     //create grid
+    board.style.width = 100 * Math.sqrt(size) + "px";
+    console.log(size);
     board.style.setProperty('--grid-rows', Math.sqrt(size));
     board.style.setProperty('--grid-cols', Math.sqrt(size));
 
@@ -242,6 +247,8 @@ function win(){
 
     setTimeout(() => board.style.backgroundImage = `url("pics/win.png")`,1000);
 
+    audio.pause();
+
     //write for highscores
     writeFile("./highscores.txt", tiles_clicked + "," + time, 
 
@@ -254,8 +261,13 @@ function win(){
 
 
 //checks for player to be ready upon button click
-initial_load(16);
+document.getElementById('4x4').addEventListener('click', () => initial_load(16));
+document.getElementById('8x8').addEventListener('click', () => initial_load(64));
+document.getElementById('10x10').addEventListener('click', () => initial_load(100));
+
 document.getElementById('shuffle').addEventListener('click', () => shuffle());
+
+document.getElementById('cheat').addEventListener('click', () => cheat());
 
 
 

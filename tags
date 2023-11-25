@@ -62,6 +62,7 @@
 Tile Game	index.html	/^    <h1>Tile Game<\/h1>$/;"	h
 Tile Game	index.html	/^    <title>Tile Game<\/title>$/;"	j
 array_index_to_grid_coord	index.js	/^function array_index_to_grid_coord(index){$/;"	f
+audio	index.js	/^let audio;$/;"	v
 background	index.js	/^let background;$/;"	v
 board	index.js	/^let board;$/;"	v
 body	style.css	/^body {$/;"	s
@@ -71,7 +72,7 @@ empty	index.js	/^let empty = [];$/;"	v
 gen_bg	index.js	/^function gen_bg(option){$/;"	f
 initial_load	index.js	/^function initial_load(s){$/;"	f
 is_movable	index.js	/^function is_movable(index){$/;"	f
-num_shuffles	index.js	/^let num_shuffles = 5;$/;"	v
+num_shuffles	index.js	/^let num_shuffles = 50;$/;"	v
 project3	README.md	/^# project3$/;"	c
 shuffle	index.js	/^function shuffle(){$/;"	f
 shuffle_helper	index.js	/^function shuffle_helper(array){$/;"	f
