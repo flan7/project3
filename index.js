@@ -7,7 +7,7 @@ let empty = [];
 let size;
 let shuffle_order = [];
 let board;
-let num_shuffles = 50;
+let num_shuffles = 5;
 let shuffle_interval = 150;
 
 function gen_bg(option){
@@ -63,7 +63,6 @@ function shuffle_worker(){
         for (let child of board.children){
 
             if(is_movable(child.dataset.index) && child.dataset.index != shuffle_order.slice(-1)){
-                console.log(child.dataset.index);
                 movable.push(child);
             }
         }
@@ -90,10 +89,6 @@ function shuffle(){
 
     shuffle_counter = 0;
     shuffling = setInterval(shuffle_worker, shuffle_interval);
-
-
-
-
 
 }
 
@@ -160,6 +155,10 @@ function tile_click(event){
 
         swap_tile(tile);
 
+        //tile click counter
+        tiles_clicked++;
+        document.getElementById('tc').textContent = tiles_clicked;
+
         //verifies if this is the last move
         verify_win();
 
@@ -182,9 +181,6 @@ function swap_tile(tile){
     empty[0] = coords[0];
     empty[1] = coords[1];
 
-    //tile click counter
-    tiles_clicked++;
-    document.getElementById('tc').textContent = tiles_clicked;
 }
 
 function is_movable(index){
@@ -221,25 +217,23 @@ function verify_win(){
 
     //loops through all elements and compares their number value to their index
     //in the grid
-    let i = 0;
     for(let child of board.children){
-        if (child.textContent === i + 1){
-            is_win = true;
-        }
-        else{
-            is_win = false;
-            break;
+        let label = parseInt(child.textContent);
+        let index = parseInt(child.dataset.index);
+        if (label != index + 1){
+            console.log("false");
+            console.log(label);
+            console.log(index + 1);
+            return false;
         }
 
-        i++;
     }
 
-    if (is_win && tiles_clicked > 0){
-        //stop timer
-        clearInterval(timer);
-        //set the award messag
-        document.getElementsByClassName('award').textContent = 'U win!';
-    }
+    //stop timer
+    clearInterval(timer);
+    console.log("true");
+    //set the award messag
+    document.getElementById('award').textContent = 'U win!';
 }
 
 

@@ -70,7 +70,7 @@ empty	index.js	/^let empty = [];$/;"	v
 gen_bg	index.js	/^function gen_bg(option){$/;"	f
 initial_load	index.js	/^function initial_load(s){$/;"	f
 is_movable	index.js	/^function is_movable(index){$/;"	f
-num_shuffles	index.js	/^let num_shuffles = 50;$/;"	v
+num_shuffles	index.js	/^let num_shuffles = 5;$/;"	v
 project3	README.md	/^# project3$/;"	c
 shuffle	index.js	/^function shuffle(){$/;"	f
 shuffle_helper	index.js	/^function shuffle_helper(array){$/;"	f
