@@ -74,7 +74,7 @@ function create_board(){
     board.style.setProperty('--grid-rows', Math.sqrt(size));
     board.style.setProperty('--grid-cols', Math.sqrt(size));
 
-    //board.style.backgroundImage = `url(${background})`;
+    board.style.backgroundImage = `url(${background})`;
 
     //creates divs for each number of tiles on board, minus 1 tile for the
     //empty
@@ -84,7 +84,6 @@ function create_board(){
         tile.dataset.index = i;
         tile.addEventListener('click', tile_click);
 
-        //used as index
         tile.textContent = (i + 1);
 
         board.appendChild(tile);
@@ -92,7 +91,7 @@ function create_board(){
     }
 
     //empty coords set to the bottom right tile
-    empty = [Math.sqrt(size),Math.sqrt(size)];
+    empty = [Math.sqrt(size),Math.sqrt(size),15]; //15 is index
 
 
     //tiles clicked
@@ -103,20 +102,11 @@ function create_board(){
 //is_movable() function
 function tile_click(event){
     var tile = event.target;
-    var coords = array_index_to_grid_coord(tile.dataset.index);
 
     //if tile is movable, swaps it with the empty tile
     if (is_movable(tile)){
 
-        tile.style.gridColumn = empty[0];
-        tile.style.gridRow = empty[1];
-
-        empty[0] = coords[0];
-        empty[1] = coords[1];
-
-        //tile click counter
-        tiles_clicked++;
-        document.getElementById('tc').innerHTML = tiles_clicked;
+        swap_tile(tile);
 
         //verifies if this is the last move
         verify_win();
@@ -124,10 +114,35 @@ function tile_click(event){
     }
 
 }
+function swap_tile(tile){
+
+    var coords = array_index_to_grid_coord(tile.dataset.index);
+
+    //swap index for coord calculation
+    var temp;
+    temp = empty[2];
+    empty[2] = tile.dataset.index;
+    tile.dataset.index = temp;
+
+    // console.log(coords);
+    // console.log(empty);
+    tile.style.gridColumn = empty[0];
+    tile.style.gridRow = empty[1];
+
+    empty[0] = coords[0];
+    empty[1] = coords[1];
+    // console.log(coords);
+    // console.log(empty);
+
+    //tile click counter
+    tiles_clicked++;
+    document.getElementById('tc').innerHTML = tiles_clicked;
+}
 
 function is_movable(tile){
 
     var coords = array_index_to_grid_coord(tile.dataset.index);
+    console.log(coords);
 
     //if tile is adjacent, reutrn true
     if (coords[0] === empty[0] && Math.abs(coords[1] - empty[1]) === 1){
@@ -136,7 +151,6 @@ function is_movable(tile){
     else if (Math.abs(coords[0] - empty[0]) === 1 && coords[1] === empty[1]){
         return true;
     }
-    return true;
     return false;
 }
 
@@ -147,7 +161,7 @@ function array_index_to_grid_coord(index){
     var x = Math.floor(index / columns);
     var y = index % columns;
 
-    return [x,y];
+    return [y + 1,x + 1];
 }
 
 function verify_win(){
