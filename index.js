@@ -9,6 +9,7 @@ let shuffle_order = [];
 let board;
 let num_shuffles = 5;
 let shuffle_interval = 150;
+let current_time;
 
 function gen_bg(option){
 
@@ -218,22 +219,37 @@ function verify_win(){
     //loops through all elements and compares their number value to their index
     //in the grid
     for(let child of board.children){
+
         let label = parseInt(child.textContent);
         let index = parseInt(child.dataset.index);
+
         if (label != index + 1){
-            console.log("false");
-            console.log(label);
-            console.log(index + 1);
             return false;
         }
 
     }
 
+    win();
+
+}
+
+function win(){
+
     //stop timer
-    clearInterval(timer);
-    console.log("true");
+    clearInterval(current_time);
     //set the award messag
     document.getElementById('award').textContent = 'U win!';
+
+    setTimeout(() => board.style.backgroundImage = `url("pics/win.png")`,1000);
+
+    //write for highscores
+    writeFile("./highscores.txt", tiles_clicked + "," + time, 
+
+        //callback for writing fucntion
+        (err) => { 
+
+        if (err) throw err; 
+    }) 
 }
 
 

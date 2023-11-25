@@ -66,6 +66,7 @@ background	index.js	/^let background;$/;"	v
 board	index.js	/^let board;$/;"	v
 body	style.css	/^body {$/;"	s
 create_board	index.js	/^function create_board(){$/;"	f
+current_time	index.js	/^let current_time;$/;"	v
 empty	index.js	/^let empty = [];$/;"	v
 gen_bg	index.js	/^function gen_bg(option){$/;"	f
 initial_load	index.js	/^function initial_load(s){$/;"	f
@@ -85,3 +86,4 @@ tiles_clicked	index.js	/^let tiles_clicked;$/;"	v
 time	index.js	/^let time;$/;"	v
 timer	index.js	/^function timer(){$/;"	f
 verify_win	index.js	/^function verify_win(){$/;"	f
+win	index.js	/^function win(){$/;"	f
