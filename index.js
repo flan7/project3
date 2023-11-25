@@ -83,6 +83,11 @@ function create_board(){
         tile.className = 'grid-item';
         tile.dataset.index = i;
         tile.addEventListener('click', tile_click);
+        
+        //intitial tile position
+        var cd = array_index_to_grid_coord(i);
+        tile.style.gridColumn = cd[0];
+        tile.style.gridRow = cd[1];
 
         tile.textContent = (i + 1);
 

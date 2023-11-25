@@ -18,12 +18,11 @@ body {
 }
 
 .grid-item {
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   border: 2px solid black;
   font-size: 40px;
   text-align: center;
   color: yellow;
-  position: fixed;
 }
 
