@@ -71,9 +71,9 @@ empty	index.js	/^let empty = [];$/;"	v
 gen_bg	index.js	/^function gen_bg(option){$/;"	f
 initial_load	index.js	/^function initial_load(s){$/;"	f
 is_movable	index.js	/^function is_movable(index){$/;"	f
-num_shuffles	index.js	/^let num_shuffles = 50;$/;"	v
+num_shuffles	index.js	/^let num_shuffles$/;"	v
 project3	README.md	/^# project3$/;"	c
-shuffle	index.js	/^function shuffle(){$/;"	f
+shuffle	index.js	/^function shuffle(num){$/;"	f
 shuffle_helper	index.js	/^function shuffle_helper(array){$/;"	f
 shuffle_interval	index.js	/^let shuffle_interval = 150;$/;"	v
 shuffle_order	index.js	/^let shuffle_order = [];$/;"	v

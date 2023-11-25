@@ -7,7 +7,7 @@ let empty = [];
 let shuffle_order = [];
 let board;
 let size;
-let num_shuffles = 50;
+let num_shuffles
 let shuffle_interval = 150;
 let current_time;
 let audio;
@@ -91,9 +91,11 @@ function shuffle_worker(){
         }
 }
 
-function shuffle(){
+function shuffle(num){
 
     shuffle_order = [];
+
+    num_shuffles = num;
 
     shuffle_counter = 0;
     shuffling = setInterval(shuffle_worker, shuffle_interval);
@@ -119,6 +121,9 @@ function create_board(){
     
     //gets the board object defined in index.html
     board = document.getElementById('board');
+
+    //clear
+    board.innerHTML = '';
     
     //create grid
     board.style.width = 100 * Math.sqrt(size) + "px";
@@ -249,18 +254,10 @@ function win(){
     //set the award messag
     document.getElementById('award').textContent = 'U win!';
 
-    setTimeout(() => board.style.backgroundImage = `url("pics/win.png")`,1000);
+    setTimeout(() => board.style.backgroundImage = `url("pics/win.png")`,500);
 
     audio.pause();
 
-    //write for highscores
-    writeFile("./highscores.txt", tiles_clicked + "," + time, 
-
-        //callback for writing fucntion
-        (err) => { 
-
-        if (err) throw err; 
-    }) 
 }
 
 
@@ -275,8 +272,10 @@ document.getElementById('biden').addEventListener('click', () => choose_bg(2));
 document.getElementById('stallman').addEventListener('click', () => choose_bg(3));
 document.getElementById('linus').addEventListener('click', () => choose_bg(4));
 
+//times to shuffle
 
-document.getElementById('shuffle').addEventListener('click', () => shuffle());
+document.getElementById('shuffle5').addEventListener('click', () => shuffle(5));
+document.getElementById('shuffle50').addEventListener('click', () => shuffle(50));
 
 
 
