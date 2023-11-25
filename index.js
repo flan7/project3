@@ -13,7 +13,11 @@ let current_time;
 let audio;
 
 function choose_bg(num){
-    board.style.backgroundImage = `url(pics/b${num}.png)`;
+
+    for (let child of board.children){
+        child.style.backgroundImage = `url(pics/b${num}.png)`;
+    }
+
 }
 
 function gen_bg(option){
@@ -127,11 +131,11 @@ function create_board(){
     
     //create grid
     board.style.width = 100 * Math.sqrt(size) + "px";
-    console.log(size);
+
     board.style.setProperty('--grid-rows', Math.sqrt(size));
     board.style.setProperty('--grid-cols', Math.sqrt(size));
 
-    board.style.backgroundImage = `url(${background})`;
+    //board.style.backgroundImage = `url(${background})`;
 
     //creates divs for each number of tiles on board, minus 1 tile for the
     //empty
@@ -145,6 +149,14 @@ function create_board(){
         var cd = array_index_to_grid_coord(i);
         tile.style.gridColumn = cd[0];
         tile.style.gridRow = cd[1];
+
+        //set image
+        tile.style.backgroundImage = `url(${background})`;
+
+        //set image position
+        var bg_string = String(-(100 * (cd[0] -1)))  + "px " + String(-((cd[1] -1) * 100)) + "px";
+        console.log(bg_string);
+        tile.style.backgroundPosition = bg_string;
 
         tile.textContent = String(i + 1);
 
@@ -192,6 +204,8 @@ function swap_tile(tile){
 
     tile.style.gridColumn = empty[0];
     tile.style.gridRow = empty[1];
+
+    // tile.style.backgroundPosition = String(empty[0] * 100) + " " + String(empty[1] * 100);
 
     empty[0] = coords[0];
     empty[1] = coords[1];
@@ -254,7 +268,7 @@ function win(){
     //set the award messag
     document.getElementById('award').textContent = 'U win!';
 
-    setTimeout(() => board.style.backgroundImage = `url("pics/win.png")`,500);
+    setTimeout(() => choose_bg(5),500);
 
     audio.pause();
 
