@@ -12,6 +12,10 @@ let shuffle_interval = 150;
 let current_time;
 let audio;
 
+function choose_bg(num){
+    board.style.backgroundImage = `url(pics/b${num}.png)`;
+}
+
 function gen_bg(option){
 
     var basedir = "pics/";
@@ -265,9 +269,14 @@ document.getElementById('4x4').addEventListener('click', () => initial_load(16))
 document.getElementById('8x8').addEventListener('click', () => initial_load(64));
 document.getElementById('10x10').addEventListener('click', () => initial_load(100));
 
-document.getElementById('shuffle').addEventListener('click', () => shuffle());
+//chose bg
+document.getElementById('obama').addEventListener('click', () => choose_bg(1));
+document.getElementById('biden').addEventListener('click', () => choose_bg(2));
+document.getElementById('stallman').addEventListener('click', () => choose_bg(3));
+document.getElementById('linus').addEventListener('click', () => choose_bg(4));
 
-document.getElementById('cheat').addEventListener('click', () => cheat());
+
+document.getElementById('shuffle').addEventListener('click', () => shuffle());
 
 
 

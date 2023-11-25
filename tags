@@ -59,13 +59,12 @@
 #award	style.css	/^#award {$/;"	i
 #board	style.css	/^#board {$/;"	i
 .grid-item	style.css	/^.grid-item {$/;"	c
-Tile Game	index.html	/^    <h1>Tile Game<\/h1>$/;"	h
-Tile Game	index.html	/^    <title>Tile Game<\/title>$/;"	j
 array_index_to_grid_coord	index.js	/^function array_index_to_grid_coord(index){$/;"	f
 audio	index.js	/^let audio;$/;"	v
 background	index.js	/^let background;$/;"	v
 board	index.js	/^let board;$/;"	v
 body	style.css	/^body {$/;"	s
+choose_bg	index.js	/^function choose_bg(num){$/;"	f
 create_board	index.js	/^function create_board(){$/;"	f
 current_time	index.js	/^let current_time;$/;"	v
 empty	index.js	/^let empty = [];$/;"	v
