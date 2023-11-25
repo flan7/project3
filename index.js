@@ -5,6 +5,10 @@ let tiles = [];
 let background;
 let empty = [];
 let size;
+let shuffle_order = [];
+let board;
+let num_shuffles = 50;
+let shuffle_interval = 150;
 
 function gen_bg(option){
 
@@ -28,12 +32,13 @@ function gen_bg(option){
 //shuffle by inputting random nums to sort()
 function shuffle_helper(array){
     
-    return array.sort(()=>Math.random()-0.5);
+    return array[Math.floor(Math.random() * array.length)];
+
 
 }
     
 //starts the game when player presses button, initializes things, main funciton
-function shuffle(s){
+function initial_load(s){
 
     //unlike HW4, start time from zero and increment in the timer() function
     //below
@@ -47,10 +52,52 @@ function shuffle(s){
     //creates initial board
     create_board();
     
-    //refreshes the function every second, for timer to count up
-    current_time = setInterval(timer, 1000);
 
 }
+
+function shuffle_worker(){
+
+        var movable = [];
+
+        //find movable tiles
+        for (let child of board.children){
+
+            if(is_movable(child.dataset.index) && child.dataset.index != shuffle_order.slice(-1)){
+                console.log(child.dataset.index);
+                movable.push(child);
+            }
+        }
+
+        var shuffled = shuffle_helper(movable);
+        
+        shuffle_order.push(shuffled.dataset.index);
+
+        // setTimeout(() => swap_tile(shuffled), 100);
+        swap_tile(shuffled);
+        shuffle_counter++;
+    
+        if (shuffle_counter >= num_shuffles){
+            clearInterval(shuffling);
+
+            //refreshes the function every second, for timer to count up
+            current_time = setInterval(timer, 1000);
+        }
+}
+
+function shuffle(){
+
+    shuffle_order = [];
+
+    shuffle_counter = 0;
+    shuffling = setInterval(shuffle_worker, shuffle_interval);
+
+
+
+
+
+}
+
+            
 
 //similar to function created in HW4 but counts up and has no time=0 lose
 //condition
@@ -61,14 +108,14 @@ function timer(){
     //sets the timer
     var min = Math.floor(time / 60); //rounds down for round number
     var sec = time % 60; //remainder is seconds
-    document.getElementById('time').innerHTML = min + ":" + sec;
+    document.getElementById('time').textContent = min + ":" + sec;
 }
 
 //creates the game board
 function create_board(){
     
     //gets the board object defined in index.html
-    var board = document.getElementById('board');
+    board = document.getElementById('board');
     
     //create grid
     board.style.setProperty('--grid-rows', Math.sqrt(size));
@@ -89,7 +136,7 @@ function create_board(){
         tile.style.gridColumn = cd[0];
         tile.style.gridRow = cd[1];
 
-        tile.textContent = (i + 1);
+        tile.textContent = String(i + 1);
 
         board.appendChild(tile);
         
@@ -109,7 +156,7 @@ function tile_click(event){
     var tile = event.target;
 
     //if tile is movable, swaps it with the empty tile
-    if (is_movable(tile)){
+    if (is_movable(tile.dataset.index)){
 
         swap_tile(tile);
 
@@ -129,25 +176,24 @@ function swap_tile(tile){
     empty[2] = tile.dataset.index;
     tile.dataset.index = temp;
 
-    // console.log(coords);
-    // console.log(empty);
     tile.style.gridColumn = empty[0];
     tile.style.gridRow = empty[1];
 
     empty[0] = coords[0];
     empty[1] = coords[1];
-    // console.log(coords);
-    // console.log(empty);
 
     //tile click counter
     tiles_clicked++;
-    document.getElementById('tc').innerHTML = tiles_clicked;
+    document.getElementById('tc').textContent = tiles_clicked;
 }
 
-function is_movable(tile){
+function is_movable(index){
 
-    var coords = array_index_to_grid_coord(tile.dataset.index);
-    console.log(coords);
+    var coords = array_index_to_grid_coord(index);
+
+    if (coords === empty.slice(0,1)){
+        return false;
+    }
 
     //if tile is adjacent, reutrn true
     if (coords[0] === empty[0] && Math.abs(coords[1] - empty[1]) === 1){
@@ -188,7 +234,7 @@ function verify_win(){
         i++;
     }
 
-    if (is_win){
+    if (is_win && tiles_clicked > 0){
         //stop timer
         clearInterval(timer);
         //set the award messag
@@ -198,7 +244,8 @@ function verify_win(){
 
 
 //checks for player to be ready upon button click
-document.getElementById('shuffle').addEventListener('click', () => shuffle(16));
+initial_load(16);
+document.getElementById('shuffle').addEventListener('click', () => shuffle());
 
 
 
