@@ -322,6 +322,7 @@ document.getElementById('linus').addEventListener('click', () => choose_bg(4));
 document.getElementById('shuffle5').addEventListener('click', () => shuffle(5));
 document.getElementById('shuffle50').addEventListener('click', () => shuffle(50));
 document.getElementById('shuffle500').addEventListener('click', () => shuffle(500));
+document.getElementById('shuffle2000').addEventListener('click', () => shuffle(2000));
 
 
 
