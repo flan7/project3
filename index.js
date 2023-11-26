@@ -101,6 +101,10 @@ function shuffle(num){
 
     num_shuffles = num;
 
+    if (num > 50) {
+        shuffle_interval = 50;
+    }
+
     shuffle_counter = 0;
     shuffling = setInterval(shuffle_worker, shuffle_interval);
 
@@ -321,6 +325,7 @@ document.getElementById('linus').addEventListener('click', () => choose_bg(4));
 
 document.getElementById('shuffle5').addEventListener('click', () => shuffle(5));
 document.getElementById('shuffle50').addEventListener('click', () => shuffle(50));
+document.getElementById('shuffle500').addEventListener('click', () => shuffle(500));
 
 
 
