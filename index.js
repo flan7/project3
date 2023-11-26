@@ -8,7 +8,6 @@ let shuffle_order = [];
 let board;
 let size;
 let num_shuffles
-let shuffle_interval = 150;
 let current_time;
 let audio;
 
@@ -96,6 +95,8 @@ function shuffle_worker(){
 }
 
 function shuffle(num){
+
+    let shuffle_interval = 150;
 
     shuffle_order = [];
 

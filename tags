@@ -76,7 +76,6 @@ p	style.css	/^p {$/;"	s
 project3	README.md	/^# project3$/;"	c
 shuffle	index.js	/^function shuffle(num){$/;"	f
 shuffle_helper	index.js	/^function shuffle_helper(array){$/;"	f
-shuffle_interval	index.js	/^let shuffle_interval = 150;$/;"	v
 shuffle_order	index.js	/^let shuffle_order = [];$/;"	v
 shuffle_worker	index.js	/^function shuffle_worker(){$/;"	f
 size	index.js	/^let size;$/;"	v
