@@ -161,7 +161,6 @@ function create_board(){
 
         //set image position
         var bg_string = String(-(100 * (cd[0] -1)))  + "px " + String(-((cd[1] -1) * 100)) + "px";
-        console.log(bg_string);
         tile.style.backgroundPosition = bg_string;
 
         tile.textContent = String(i + 1);
@@ -171,7 +170,7 @@ function create_board(){
     }
 
     //empty coords set to the bottom right tile
-    empty = [Math.sqrt(size),Math.sqrt(size),15]; //15 is index
+    empty = [Math.sqrt(size),Math.sqrt(size),size-1]; //15 is index
 
 
     //tiles clicked
@@ -238,8 +237,6 @@ function swap_tile(tile){
 
     tile.style.gridColumn = empty[0];
     tile.style.gridRow = empty[1];
-
-    // tile.style.backgroundPosition = String(empty[0] * 100) + " " + String(empty[1] * 100);
 
     empty[0] = coords[0];
     empty[1] = coords[1];
