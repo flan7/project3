@@ -135,8 +135,6 @@ function create_board(){
     board.style.setProperty('--grid-rows', Math.sqrt(size));
     board.style.setProperty('--grid-cols', Math.sqrt(size));
 
-    //board.style.backgroundImage = `url(${background})`;
-
     //creates divs for each number of tiles on board, minus 1 tile for the
     //empty
     for (let i = 0; i < size - 1; i++){
@@ -144,6 +142,9 @@ function create_board(){
         tile.className = 'grid-item';
         tile.dataset.index = i;
         tile.addEventListener('click', tile_click);
+        tile.addEventListener('mouseover', tile_hover);
+        tile.addEventListener('mouseout', tile_hover_off);
+        tile.style.border = "2px solid black";
         
         //intitial tile position
         var cd = array_index_to_grid_coord(i);
@@ -190,6 +191,36 @@ function tile_click(event){
         verify_win();
 
     }
+
+}
+
+//handles the events created by create_board() for each tile hover. Calls the
+//is_movable() function
+function tile_hover(event){
+    var tile = event.target;
+
+    //if tile is movable, swaps it with the empty tile
+    if (is_movable(tile.dataset.index)){
+
+        tile.style.border = "2px solid #006600";
+
+
+    }
+    // setTimeout(() => tile.style.border = "2px solid black", 500);
+
+}
+
+function tile_hover_off(event){
+    var tile = event.target;
+
+    //if tile is movable, swaps it with the empty tile
+    if (is_movable(tile.dataset.index)){
+
+        tile.style.border = "2px solid black";
+
+
+    }
+    // setTimeout(() => tile.style.border = "2px solid black", 500);
 
 }
 function swap_tile(tile){

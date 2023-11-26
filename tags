@@ -81,6 +81,8 @@ shuffle_worker	index.js	/^function shuffle_worker(){$/;"	f
 size	index.js	/^let size;$/;"	v
 swap_tile	index.js	/^function swap_tile(tile){$/;"	f
 tile_click	index.js	/^function tile_click(event){$/;"	f
+tile_hover	index.js	/^function tile_hover(event){$/;"	f
+tile_hover_off	index.js	/^function tile_hover_off(event){$/;"	f
 tiles	index.js	/^let tiles = [];$/;"	v
 tiles_clicked	index.js	/^let tiles_clicked;$/;"	v
 time	index.js	/^let time;$/;"	v
