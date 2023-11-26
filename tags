@@ -72,6 +72,7 @@ gen_bg	index.js	/^function gen_bg(option){$/;"	f
 initial_load	index.js	/^function initial_load(s){$/;"	f
 is_movable	index.js	/^function is_movable(index){$/;"	f
 num_shuffles	index.js	/^let num_shuffles$/;"	v
+p	style.css	/^p {$/;"	s
 project3	README.md	/^# project3$/;"	c
 shuffle	index.js	/^function shuffle(num){$/;"	f
 shuffle_helper	index.js	/^function shuffle_helper(array){$/;"	f

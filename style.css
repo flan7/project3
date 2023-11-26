@@ -16,6 +16,11 @@ body {
   color: gold;
 }
 
+p {
+  justify-content: right;
+  text-align: right;
+}
+
 .grid-item {
   width: 96px;
   height: 96px;
