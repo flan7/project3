@@ -100,12 +100,12 @@ function shuffle(num){
     shuffle_order = [];
 
     num_shuffles = num;
+    shuffle_counter = 0;
 
     if (num > 50) {
-        shuffle_interval = 50;
+        shuffle_interval = 0;
     }
 
-    shuffle_counter = 0;
     shuffling = setInterval(shuffle_worker, shuffle_interval);
 
 }
@@ -210,7 +210,6 @@ function tile_hover(event){
 
 
     }
-    // setTimeout(() => tile.style.border = "2px solid black", 500);
 
 }
 
@@ -224,7 +223,6 @@ function tile_hover_off(event){
 
 
     }
-    // setTimeout(() => tile.style.border = "2px solid black", 500);
 
 }
 function swap_tile(tile){
