@@ -312,7 +312,7 @@ function win(){
 //checks for player to be ready upon button click
 document.getElementById('4x4').addEventListener('click', () => initial_load(16));
 document.getElementById('8x8').addEventListener('click', () => initial_load(64));
-document.getElementById('10x10').addEventListener('click', () => initial_load(100));
+document.getElementById('12x12').addEventListener('click', () => initial_load(144));
 
 //chose bg
 document.getElementById('obama').addEventListener('click', () => choose_bg(1));
