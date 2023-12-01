@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>fifteen puzzle</title> 
+	<style> 
+    body {
+  background: linear-gradient(to right, #fbc2eb, #a6c1ee); 
+}
+
+h1, h2 {
+  font-family: 'Pacifico', cursive;
+  color: #396;
+  text-shadow: 1px 1px 2px #ddd;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #630;  
+}
+
+article {
+  background: rgba(255,255,255,0.8);
+  padding: 40px; 
+  border-radius: 30px;
+  box-shadow: 3px 5px 12px rgba(0,0,0,0.15);
+} 
+
+article::before {
+  content: "";
+  background: #fff url(palm-trees.jpg) no-repeat center/cover; 
+  position: absolute;
+  height: 140px;
+  width: 100%;
+  left: 0;
+  top: -40px;  
+  border-radius: 30px;
+  z-index: -1;
+  box-shadow: 3px 5px 12px rgba(0,0,0,0.15);  
+}
+	</style>
+</head> 
+
+<body> <h1>Fifteen Puzzle Project</h1> 
+
+<h2>Team Go getters</h2> 
+
+<p>Yared Geremew<br>  Holden Salomon<br> Muhd Abdullah<br>  Emmanuel Gohourou <br> <br> 
+ <p>Date: Nov 30, 2023</p> 
+
+<article> <p>This project focused on building a sliding puzzle game from the ground up using pure JavaScript and direct DOM manipulation for all game logic and interactivity. The classic sliding puzzle format involves a 4x4 grid with 15 numbered squares and one missing space. To solve the puzzle, players must slide neighboring pieces into the empty space until the tiles are back in numerical order.</p> <p>A key challenge and learning opportunity of this project was implementing the game mechanics like checking movable tiles, shuffling, swapping pieces, and detecting a win completely in JavaScript code. Unlike projects where backend languages handle complex logic, the core puzzle functionality relied on JavaScript to power it through DOM updates. This provided essential practice using plain JS without libraries or frameworks to manage state and provide interactivity.</p> <p>Visually, an image background was displayed behind the puzzle pieces to enhance gameplay. With 15 div elements representing each tile, the background image was selectively offset on every container to reveal different 100x100 sections of the full photo. Careful calculation of the CSS background-position property for each tile was vital in ensuring the concept worked as intended. An engaging, distinguishable image in a 400x400 resolution performed well for perceiving continuity in the puzzle sections.</p> <p>Several creative aspects allowed personal customization of the game project. The visual presentation offered flexibility in styling elements like borders, typography for numbers, hover effects for movable pieces, and more. The background image selection also provided an opportunity to choose decorative artwork, illustrations, or photos to theme the puzzle. This freedom promoted uniqueness and ownership over building a sliding puzzle variant to one’s preferences.</p> <p>On the technical side, efficiently coding the shuffle algorithm posed an engaging challenge. With the requirement to randomly rearrange solvable puzzles in under one second, carefully constructed logic was critical. The optimal approach involved selecting a neighboring tile to the blank space at random and swapping it hundreds of times. This simulated manual shuffling steps rather than arbitrarily reassigning positions. Meeting the performance benchmark required tight code free of unnecessary operations.</p> <p>Similarly, tracking movable pieces built logical skills by identifying adjacency conditions relative to the open space on the board. Changing styles on valid hover tiles via entering/exiting a CSS class sharpened DOM manipulation abilities to visually indicate this game rule. Validating a win scenario by checking for complete numerical order also involved useful practice with comparison operators and arrays.</p> <p>In summary, developing a sliding puzzle game from scratch powerfully combined creative and technical skills. Choosing visuals, designing aesthetically pleasing styles, and crafting engaging components tapped creative potential. Coding interactive logic, dynamic effects, and efficient algorithms strengthened technical aptitude with JavaScript and DOM integration. The finished product is an awesome customized sliding puzzle featuring fluid transitions, dynamic hovers, efficient shuffling, and pure JS interactivity allowing players to challenge themselves and have fun.</p> 
+</article> 
+</body> 
+</html>
